@@ -1,0 +1,51 @@
+/* eslint-env node */
+{
+    "root": false,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "globals": {
+      "require": true,
+      "module": true
+    },
+    "env": {
+      "node": true,
+      "browser": true,
+      "commonjs": true,
+      "amd": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:vue/base",
+      "plugin:vue/essential",
+      "plugin:vue/vue3-recommended",
+      "plugin:vue/vue3-essential",
+      "@vue/typescript/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "rules": {
+      "no-console": "error",
+      "no-debugger": "error",
+      "no-unused-components": "off",
+      "no-unused-vars": "off",
+      "no-empty-function": "off",
+      "prefer-const": "off",
+      "@typescript-eslint/no-unused-vars": "off"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "mocha": true
+        }
+      }
+    ]
+  }
