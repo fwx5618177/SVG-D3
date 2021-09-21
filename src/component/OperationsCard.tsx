@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from 'antd';
 import Drawing from "./subComponent/Drawing";
 import SvgTag from "./subComponent/svg";
+import SvgTest from "./subComponent/svg.test";
 
 class OperationsCard extends React.Component {
     constructor(props: any) {
@@ -24,7 +25,8 @@ class OperationsCard extends React.Component {
                 }}
             >
                 <Drawing {...this.state} />
-                <SvgTag />
+                {/* <SvgTag /> */}
+                <SvgTest />
             </Card>
             </>
         )
