@@ -1,16 +1,16 @@
 import React from 'react';
-import { Layout, Menu, Button, Modal } from 'antd';
+import { Layout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   BorderOutlined,
 } from '@ant-design/icons';
-import OperationsCard from './component/OperationsCard';
-import PicturesWall from './component/upload'
+import { RouterList } from './pages/router.config';
+import D3Case from './pages/D3';
 
 const { Header, Sider, Content } = Layout;
 
-class SiderDemo extends React.Component {
+class SideMenu extends React.Component {
   state = {
     collapsed: false,
   };
@@ -25,27 +25,17 @@ class SiderDemo extends React.Component {
     });
   };
 
-  handleImport() {
-    const confirm = Modal.info({
-      title: '上传',
-      content: (
-          <PicturesWall ></PicturesWall>
-      ),
-      onOk: (record: any) => {
-        confirm.destroy();
-      }
-    })
-  }
-
   render() {
     return (
       <Layout>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<BorderOutlined />}>
-              方框
+          {RouterList?.map((item, index) => (
+            <Menu.Item key={index} icon={<BorderOutlined />}>
+              {item.menuName}
             </Menu.Item>
+          ))}
           </Menu>
         </Sider>
         <Layout className="site-layout">
@@ -64,10 +54,7 @@ class SiderDemo extends React.Component {
               backgroundColor: '#DCDCDC',
             }}
           >
-            <div style={{ paddingBottom: 10 }}>
-              <Button type='primary' onClick={this.handleImport}>上传图片</Button>
-            </div>
-            <OperationsCard />
+            <D3Case />
           </Content>
         </Layout>
       </Layout>
@@ -75,4 +62,4 @@ class SiderDemo extends React.Component {
   }
 }
 
-export default SiderDemo;
+export default SideMenu;

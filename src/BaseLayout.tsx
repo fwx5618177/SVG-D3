@@ -1,13 +1,13 @@
 import React from 'react';
-// import RouterConfig from './pages/router';
-import SiderDemo from './pages/square/SiderDemo';
+// import RouterConfig from './RouterConfig';
+import SideMenu from './Sider';
 
 class BaseLayout extends React.Component {
     render() {
         return (
             <>
-            <SiderDemo />
             {/* <RouterConfig /> */}
+            <SideMenu />
           </>
 
         )
