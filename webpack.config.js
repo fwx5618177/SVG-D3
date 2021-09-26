@@ -17,6 +17,7 @@ module.exports = {
     devtool: 'inline-source-map',
     resolve: {
         extensions: ['.ts', '.js', '.tsx', '.less', '.css'],
+        modules: ['node_modules'],
     },
     plugins: [
         new CleanWebpackPlugin({
