@@ -4,7 +4,6 @@ import * as d3 from 'd3';
 class CircleSVG extends React.Component {
 
     state = {
-
         svg: 'svgbg'
     }
 
