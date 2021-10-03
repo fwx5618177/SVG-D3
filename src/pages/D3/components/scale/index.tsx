@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as d3 from 'd3';
+import './index.css';
 
 class ScaleChart extends Component {
     state = {
@@ -14,6 +15,7 @@ class ScaleChart extends Component {
 
         const w = 500;
         const h = 300;
+        const padding = 30;
 
         const xMax: number = d3.max(dataset, d => d[0]) || w
         const yMax: number = d3.max(dataset, d => d[1]) || h
@@ -38,7 +40,10 @@ class ScaleChart extends Component {
             .attr('height', 200)
             .style('background-color', '#00ccff')
 
-            svg.selectAll('circle')
+            svg.append('g')
+            .attr('id', 'circles')
+            .attr('clip-path', 'url(#chart-area)')
+            .selectAll('circle')
             .data(dataset)
             .enter()
             .append('circle')
@@ -58,6 +63,25 @@ class ScaleChart extends Component {
                 .attr('font-family', 'sans-serif')
                 .attr('font-size', '11px')
                 .attr('fill', 'white')
+
+            const formatAsPercentage = d3.format('.1%');
+            const xAxis = d3.axisBottom(xScale)
+                .ticks(10)
+                .tickFormat(formatAsPercentage);
+            const yAxis = d3.axisLeft(yScale)
+                .ticks(5)
+                .tickFormat(formatAsPercentage);
+
+            svg.append('g')
+                .attr('class', 'axis')
+                .attr('transform', `translate(0, 180)`)
+                .call(xAxis)
+
+            svg.append('g')
+                .attr('class', 'axis')
+                .attr('transform', `translate(${padding}, 0)`)
+                .call(yAxis);
+            
     }
 
     render() {

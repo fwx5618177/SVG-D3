@@ -4,3 +4,7 @@ div.bar {
     height: 75px;
     background-color: teal;
 }
+
+rect:hover {
+    fill: orange;
+}

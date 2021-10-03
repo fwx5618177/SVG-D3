@@ -3,6 +3,7 @@ import ColumnDraw from "./components/column/column";
 import CircleSVG from "./components/circle";
 import ScatterPlot from './components/scatterPlot';
 import ScaleChart from "./components/scale";
+import Transition from "./components/transition";
 
 class D3Case extends React.Component {
     render() {
@@ -15,6 +16,8 @@ class D3Case extends React.Component {
             <ScatterPlot />
 
             <ScaleChart />
+
+            {/* <Transition /> */}
             </>
         );
     }
