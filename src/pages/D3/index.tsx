@@ -5,6 +5,8 @@ import ScatterPlot from './components/scatterPlot';
 import ScaleChart from "./components/scale";
 import Transition from "./components/transition";
 import Linear from "./components/line";
+import Poly from "./components/poly";
+import D3Svg from "./components/d3Svg";
 
 class D3Case extends React.Component {
     render() {
@@ -16,7 +18,11 @@ class D3Case extends React.Component {
 
             <ScatterPlot /> */}
 
-            <Linear />
+            {/* <Linear /> */}
+
+            {/* <Poly /> */}
+
+            <D3Svg />
 
             {/* <ScaleChart /> */}
 
