@@ -22,7 +22,7 @@ class D3Case extends React.Component {
 
             {/* <Poly /> */}
 
-            <D3Svg />
+            {/* <D3Svg /> */}
 
             {/* <ScaleChart /> */}
 
