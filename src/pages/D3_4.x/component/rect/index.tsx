@@ -1,6 +1,7 @@
 /**
  * Instro:
  * - 制作可以拖拉拽变形的矩阵
+ * - 通过更改state变量，在数据变换时，引起浏览器的渲染，同时更新位置
  * @author wenxuanfeng
  * @since 2021/11/10
  */
@@ -34,6 +35,7 @@ class Rect extends React.Component {
             [10,10, 'nw-resize'], 
             [10,200, 'w-resize'],
             [10,390, 'sw-resize'],
+            // [40,350, 'sw-resize'],
             [200,390, 's-resize'],
             [390,390, 'se-resize'],
             [390,200, 'e-resize'],
