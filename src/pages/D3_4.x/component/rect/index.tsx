@@ -1,3 +1,9 @@
+/**
+ * Instro:
+ * - 制作可以拖拉拽变形的矩阵
+ * @author wenxuanfeng
+ * @since 2021/11/10
+ */
 import React from 'react';
 import * as d3 from 'd3';
 
@@ -10,6 +16,11 @@ class Rect extends React.Component {
 
      data = [10, 200, 390];
 
+     /**
+      * 
+      * @param {number[]} data 数据初始化处理的数据
+      * @returns 
+      */
      generateData(data: number[]) {
          let tmpArr = [];
          for(let i = 0; i < data.length; i++) {
@@ -33,12 +44,6 @@ class Rect extends React.Component {
         return tmpData;
      }
 
-    //  click anime
-     clickAnime() {
-         console.log(1)
-         return 0
-     }
-
      componentDidMount() {
          const width = 400;
          const height = 400;
@@ -49,14 +54,17 @@ class Rect extends React.Component {
         svg.attr('width', width)
             .attr('height', height);
 
+        // 绘制矩形
         svg.append('path')
             .attr('d', 'M ' + points + ' Z')
             .attr('fill', 'none')
             .attr('stroke', 'black')
             .attr('stroke-width', 2)
 
+        // 打印目前矩形点的坐标
         console.log(points);
 
+        // 创建可拖拉拽的点
         svg.selectAll('circle')
         .data(this.generateData(this.data))
         .enter()
@@ -67,6 +75,13 @@ class Rect extends React.Component {
         .attr('fill', 'red')
         .attr('className', 'move')
         .attr('style', d => `cursor: ${d[2]};`)
+        // 拖拉拽的算法设计
+        /**
+         * @instro
+         *  - 当鼠标按下时，才会触发之后的行为
+         *  - 当鼠标弹起时，所有行为全部停止
+         *  - 当鼠标移动时，点和图像的位置发生变换
+         */
         .on('mousedown', (event) => {
             console.log(event.type);
             if(event.type === 'mousedown') this.flag = true;
