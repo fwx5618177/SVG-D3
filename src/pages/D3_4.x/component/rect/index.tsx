@@ -4,7 +4,9 @@ import * as d3 from 'd3';
 class Rect extends React.Component {
     state = {
         name: 'rect'
-     }
+     };
+
+     flag = false;
 
      data = [10, 200, 390];
 
@@ -65,10 +67,26 @@ class Rect extends React.Component {
         .attr('fill', 'red')
         .attr('className', 'move')
         .attr('style', d => `cursor: ${d[2]};`)
-        .on('onmousedown', (event) => {
-            console.log(event);
-            event.target.onmousemove = () => {
-                console.log(2);
+        .on('mousedown', (event) => {
+            console.log(event.type);
+            if(event.type === 'mousedown') this.flag = true;
+            
+            if(!this.flag) return;
+
+            event.target.onmousemove = (event: any) => {
+                if(this.flag) console.log(2, +event.x, +event.y);
+            }
+
+            event.target.onmouseout = (event: any) => {
+                if(this.flag) console.log(3, event.type);
+                this.flag = false;
+                return;
+            }
+
+            event.target.onmouseup = (event: any) => {
+                console.log(4, event.type);
+                this.flag = false;
+                return;
             }
         })
          
