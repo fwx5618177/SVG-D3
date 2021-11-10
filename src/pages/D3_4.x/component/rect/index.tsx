@@ -92,6 +92,17 @@ class Rect extends React.Component {
 
             event.target.onmousemove = (event: any) => {
                 if(this.flag) console.log(2, +event.x, +event.y);
+                let data = this.generateData(this.data)
+                data[5][0] = event.x + 5
+                data[5][1] = event.y + 5
+                svg.selectAll('circle')
+                    .data(data)
+                    .transition()
+                    .duration(200)
+                    .attr('fill', 'blue')
+                    .attr('cx', d => d[0])
+                    .attr('cy', d => d[1])
+
             }
 
             event.target.onmouseout = (event: any) => {
