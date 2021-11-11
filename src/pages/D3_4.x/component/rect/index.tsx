@@ -7,6 +7,7 @@
  */
 import React from 'react';
 import * as d3 from 'd3';
+import './index.css';
 
 class Rect extends React.Component {
     state = {
@@ -14,6 +15,8 @@ class Rect extends React.Component {
      };
 
      flag = false;
+     startX = 0;
+     startY = 0;
 
      data = [10, 200, 390];
 
@@ -47,10 +50,11 @@ class Rect extends React.Component {
      }
 
      componentDidMount() {
-         const width = 400;
+         const width = 600;
          const height = 400;
         // @ts-ignore
-        const svg = d3.select(this.refs.rect).append('svg');
+        const svg = d3.select(this.refs.rect).append('svg').attr('id', 'svgTest');
+        
         const points = this.generateData(this.data).map(val => [val[0], val[1]].join(',')).join(' ');
 
         svg.attr('width', width)
@@ -77,6 +81,13 @@ class Rect extends React.Component {
         .attr('fill', 'red')
         .attr('className', 'move')
         .attr('style', d => `cursor: ${d[2]};`)
+        /**
+         * hover特殊颜色(废弃)
+         */
+        // .on('mouseenter', event => {
+        //     event.target.style.fill = 'pink'
+        // })
+        // .on('mouseout', event => event.target.style.fill = 'red')
         // 拖拉拽的算法设计
         /**
          * @instro
@@ -85,37 +96,66 @@ class Rect extends React.Component {
          *  - 当鼠标移动时，点和图像的位置发生变换
          */
         .on('mousedown', (event) => {
-            console.log(event.type);
+            console.log(new Date(), event.type, event.x, event.y);
+            this.startX = event.x
+            this.startY = event.y
+
             if(event.type === 'mousedown') this.flag = true;
             
             if(!this.flag) return;
 
-            event.target.onmousemove = (event: any) => {
-                if(this.flag) console.log(2, +event.x, +event.y);
-                let data = this.generateData(this.data)
-                data[5][0] = event.x + 5
-                data[5][1] = event.y + 5
+            window.onmousemove = (event: any) => {
+                if(!this.flag) return
+
+                // const distanceX = Math.abs(+event.x - this.startX) > 0 ? +event.x - this.startX : 1
+                // const distanceY = Math.abs(+event.y - this.startY) > 0 ? +event.y - this.startY : 1
+
+                let circleData: any[] = this.generateData(this.data)
+                // circleData[5][0] = +circleData[5][0] + distanceX
+                // circleData[5][1] = +circleData[5][1] + distanceY 
+                console.log('move pre:', circleData[5][0], circleData[5][1])
+                circleData[5][0] = +circleData[5][0] + (+event.x - this.startX)
+                circleData[5][1] = +circleData[5][1] + (+event.y - this.startY)
+                console.log('move:', circleData[5][0], circleData[5][1])
+
+                this.startX = +event.x
+                this.startY = +event.y
+ 
                 svg.selectAll('circle')
-                    .data(data)
+                    .data(circleData)
                     .transition()
-                    .duration(200)
+                    // .duration(500)
                     .attr('fill', 'blue')
                     .attr('cx', d => d[0])
                     .attr('cy', d => d[1])
 
+                const pathData = circleData.map(val => [val[0], val[1]].join(',')).join(' ')
+                svg.select('path')
+                    .transition()
+                    // .duration(500)
+                    .attr('d', 'M ' + pathData + 'Z')
+                    .attr('fill', 'none')
+                    .attr('stroke', 'black')
+                    .attr('stroke-width', 2)
+
             }
 
-            event.target.onmouseout = (event: any) => {
-                if(this.flag) console.log(3, event.type);
-                this.flag = false;
-                return;
-            }
+            // event.target.onmouseout = (event: any) => {
+            //     if(this.flag) console.log(3, event.type);
+            //     this.flag = false;
+            //     return;
+            // }
 
-            event.target.onmouseup = (event: any) => {
-                console.log(4, event.type);
-                this.flag = false;
-                return;
-            }
+            // event.target.onmouseup = (event: any) => {
+            //     console.log(4, event.type);
+            //     this.flag = false;
+            //     return;
+            // }
+        })
+        
+        window.addEventListener('mouseup', event => {
+            this.flag = false
+            console.log(new Date(), event.x, event.y)
         })
          
      }
