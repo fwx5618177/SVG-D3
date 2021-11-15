@@ -50,10 +50,10 @@ class Rect extends React.Component {
      }
 
      componentDidMount() {
-         const width = 600;
-         const height = 400;
+         const width = document.body.clientWidth;
+         const height = document.body.clientHeight;
         // @ts-ignore
-        const svg = d3.select(this.refs.rect).append('svg').attr('id', 'svgTest');
+        const svg = d3.select(this.refs.rect).append('svg').attr('id', 'svgTest').style('z-index', 1).style('left', 0).style('top', 0);
         
         const points = this.generateData(this.data).map(val => [val[0], val[1]].join(',')).join(' ');
 
@@ -109,7 +109,8 @@ class Rect extends React.Component {
 
                 // const distanceX = Math.abs(+event.x - this.startX) > 0 ? +event.x - this.startX : 1
                 // const distanceY = Math.abs(+event.y - this.startY) > 0 ? +event.y - this.startY : 1
-
+                console.log('client:', event.clientX)
+                
                 let circleData: any[] = this.generateData(this.data)
                 // circleData[5][0] = +circleData[5][0] + distanceX
                 // circleData[5][1] = +circleData[5][1] + distanceY 
