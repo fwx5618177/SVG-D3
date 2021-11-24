@@ -22,8 +22,8 @@
         ]
     },
     // 保存的时候自动格式化
-    "editor.formatOnSave": false,
-    "prettier.semi": false,
+    "editor.formatOnSave": true,
+    "prettier.semi": true,
     "prettier.singleQuote": true,
     "javascript.format.insertSpaceBeforeFunctionParenthesis": true
 }

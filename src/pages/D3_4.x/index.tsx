@@ -3,6 +3,8 @@ import { Card } from "_antd@4.16.13@antd";
 import Data from "./component/data";
 import Rect from "./component/rect";
 // import * as d3 from 'd3';
+import Datatumn from './d3Master/datumn'
+import Display from './getDisplayMedia';
 
 class D3_4 extends Component {
     // state = {
@@ -32,7 +34,9 @@ class D3_4 extends Component {
             >
                 {/* <div ref={this.state.name}></div> */}
                 {/* <Data /> */}
-                <Rect />
+                {/* <Rect /> */}
+                {/* <Datatumn /> */}
+                <Display />
             </Card>
         )
     }
