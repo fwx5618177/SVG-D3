@@ -72,6 +72,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
+                exclude: [/monaco-editor/],
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',

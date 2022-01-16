@@ -8,6 +8,8 @@ import {
 import { RouterList } from './pages/router.config';
 import D3Case from './pages/D3';
 import D3_4 from './pages/D3_4.x';
+import PDFGenerator from './pages/PDFGenerator';
+import Scene from './pages/Scene';
 
 const { Header, Sider, Content } = Layout;
 
@@ -56,7 +58,10 @@ class SideMenu extends React.Component {
             }}
           >
             {/* <D3Case /> */}
-            <D3_4 />
+            {/* <D3_4 /> */}
+            {/* <PDFGenerator /> */}
+            {/* <Strapi /> */}
+            <Scene />
           </Content>
         </Layout>
       </Layout>
